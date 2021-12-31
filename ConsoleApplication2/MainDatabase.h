@@ -176,11 +176,17 @@ void Test() {
 	mt19937 rng(dev());
 	uniform_int_distribution<mt19937::result_type>dist6(0, 10000);
 	Timer t;
-	for (int i = 0;i < 10000;i ++) {
-		int d = dist6(rng);
+	int d = dist6(rng);
+	Row Data;
+	Data.AddAttribute(Column("int", to_string(d)));
+	Data.AddAttribute(Column("string", "Name"));
+	Data.AddAttribute(Column("string", "Gender"));
+	Table.setField(Data);
+	Table.SaveFieldName();
+	for (int i = 0; i < 10000; i++) {
+		d = dist6(rng);
 		Column k("Dung", "Tien");
-		Row Data;
-		Data.AddAttribute(Column(to_string(d),"int"));
+		Data.AddAttribute(Column("int", to_string(d)));
 		Data.AddAttribute(k);
 		Data.AddAttribute(k);
 		Table.Insert(d, Data);
